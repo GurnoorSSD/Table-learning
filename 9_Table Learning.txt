@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Math Tables Learning Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f6ff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .range {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+            width: 120px;
+        }
+
+        button {
+            padding: 8px 15px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📘 Math Tables Learning Platform</h1>
+
+    <div class="range">
+        Minimum: 2 &nbsp; | &nbsp; Maximum: 50
+    </div>
+
+    <p>Type a number (2–50) or click a table below:</p>
+
+    <input type="number" id="tableInput" min="2" max="50" placeholder="Enter number">
+    <br><br>
+    <button onclick="openTable()">Show Table</button>
+
+    <div class="buttons">
+        <!-- Clickable buttons from 2 to 50 -->
+        <script>
+            for (let i = 2; i <= 50; i++) {
+                document.write(
+                    `<button onclick="openTable(${i})">${i}</button>`
+                );
+            }
+        </script>
+    </div>
+
+    <script>
+        function openTable(num) {
+            let number = num || document.getElementById("tableInput").value;
+
+            if (number < 2 || number > 50 || number === "") {
+                alert("Please select a number between 2 and 50.");
+                return;
+            }
+
+            let newTab = window.open("", "_blank");
+
+            let tableHTML = `
+                <html>
+                <head>
+                    <title>Table of ${number}</title>
+                    <style>
+                        body {
+                            font-family: Arial;
+                            background-color: #fff;
+                            text-align: center;
+                            padding: 20px;
+                        }
+                        h2 {
+                            color: #333;
+                        }
+                        p {
+                            font-weight: bold;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h2>Multiplication Table of ${number}</h2>
+                    <p>Range: 2 to 50</p>
+            `;
+
+            for (let i = 1; i <= 10; i++) {
+                tableHTML += `<p>${number} × ${i} = ${number * i}</p>`;
+            }
+
+            tableHTML += `
+                </body>
+                </html>
+            `;
+
+            newTab.document.write(tableHTML);
+            newTab.document.close();
+        }
+    </script>
+
+</body>
+</html>
